@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // Control
   final welcomeText = Text("Welcome to WIDCY");
 
+  final logo = Image.asset("assets/images/logo.png");
+
+  loadDataFromTextFile();
+
   // Layout
-  final body = Center(child: welcomeText);
+  final body = Center(child: logo);
 
   // Screen
   final screen = Scaffold(body: body);
@@ -14,6 +21,11 @@ void main() {
   final app = MaterialApp(home: screen);
 
   runApp(app);
+}
+
+Future<void> loadDataFromTextFile() async {
+  String data = await rootBundle.loadString("assets/data/sample_textfile.txt");
+  print("Data : $data");
 }
 
 // class MyApp extends StatelessWidget {
